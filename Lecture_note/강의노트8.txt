@@ -1,0 +1,1086 @@
+# 교재 p222
+
+# 오류?
+# 오류의 종류
+# NameError: 함수이름, 변수, 리스트 이름등이 잘못된 경우
+# IndexError :  튜플,리스트의 잘못된 인덱스 접근
+# ZeroDivisionError : 0으로 나눈 경우
+# FileNotFoundError : 잘못된 파일 경로
+# SyntaxError 제외 => 예외처리 try: ~ Except 구문에서 제외
+# ---------------------------------
+# 튜플, 리스트 인덱스 접근시 발생
+# IndexError: list index out of range
+# IndexError: tuple index out of range
+# mylist = (1,)
+# print(mylist[3])
+
+# 0으로 나눈 경우
+# ZeroDivisionError: division by zero
+# print(23/0)
+
+# 변수값이 정해지 않은 경우 명령 실행시 발생
+# NameError: name 'abc' is not defined
+# print(abc)
+
+# 파일입출력, 파일삭제, 디렉토리이동시 경로가 잘못된 경우 발생
+# FileNotFoundError
+# : [WinError 2] 지정된 파일을 찾을 수 없습니다:
+# import os
+# os.remove('test.txt')
+
+# 데이터형 오류
+# ValueError
+# : invalid literal for int() with base 10: 'abc'
+# temp = int(input('숫자를 입력해주세요 ... '))
+# print(temp)
+
+# 문법 오류 :
+# SyntaxError
+# : EOL while scanning string literal
+# print('abc)
+# SyntaxError: unmatched ')'
+# print('abc'))
+
+# ---------------------------------
+# 예외처리(Exception) 란?
+# 오류가 발생을 하면
+# 메세지를 출력하거나  오류를 무시하는 기능
+
+# try..except 명령
+# try..except..else 명령
+# try..except..else..finally 명령
+# raise Exception : 사용자정의 에러
+#  ex) 금칙어, 특별한 값 지정. 데이타 유효성
+
+# ---------------------------------
+
+# 에러처리 문법 1
+# ## try..except 명령1
+# - 에러코드를 알고있어야 한다.
+# try:
+#   명령어
+# except 에러코드 as e:
+#   에러처리명령
+
+# ## try..except 명령2
+# 모든 예외의 에러 메시지를 출력할 때는 Exception 키워드
+# 에러코드를 몰라도 된다. => Exception
+# try:
+#     명령
+# except Exception as e:
+#     print(e)
+
+# ##  try..except 명령3
+# try:
+#   명령어
+# except:
+#   에러처리명령`
+
+# ----------------
+# Zerodivision Error
+# => 특정 메세지 출력
+
+try:
+  print(23/0)
+  # print(23/5) # 4.6
+except ZeroDivisionError as e:
+  print(e) # division by zero : 등록된 프로그램 에러 메세지
+  print('0으로 나눌 수 없습니다. ')
+
+print('-'*30)
+
+# IndexError: list index out of range
+listAlpha = []
+try:
+  print(listAlpha[3])
+except IndexError as e:
+  print(f'{e} , 잘못된 접근입니다.')
+
+print('-'*30)
+
+# try:
+#   에러가 나는 명령어
+#   에러가 없는 명령어
+# except 에러코드 as e:
+#   에러처리명령
+
+# 퀴즈 1: FileNotFoundError
+#  data/test.txt 가 없다면
+#  에러메세지(e)와 함께 '파일이 없습니다.' 메세지 출력
+#  있다면 파일의 내용을 출력한다.
+
+
+
+# 퀴즈 2: ValueError
+# 2개의 숫자글자를 입력받아서 더한다.
+# 입력된 글자가 숫자글자가 아니라면 에러 메세지 출력
+# 입력된 글자가 숫자글자라면  더한후 출력한다.
+
+
+# ------------------------
+# 에러명 => Exception
+# try:
+#     명령
+# except Exception as e:
+#     print(e)
+
+# try:
+#     # print(30/0)
+#     print(int('가나다'))
+# except Exception as e:
+#     print(f'에러메세지 : {e}')
+
+# 에러메세지 : division by zero
+# 에러메세지 : invalid literal for int() with base 10: '가나다'
+
+# -------------------
+# try:
+#     명령
+# except :
+#     예외처리시 명령어
+# print(v)
+# NameError: name 'v' is not defined
+
+# try:
+#     print(v)
+# except:
+#     print('에러 발생')
+    # pass # 에러 무시
+
+# --------------------------
+# 에러처리 문법 2
+
+# 에러명을 아는 경우
+# try:
+#   명령어
+# except 에러코드 as e:
+#   e 출력 ,에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+
+# try:
+#     n1 = int(input('숫자1입력 ? .... '))
+#     n2 = int(input('숫자2입력 ? .... '))
+# except ValueError as e:
+#     print('입력 데이터가 숫자가 아닙니다.\n\t\t %s' %e)
+# else:
+#     print(f'{n1} + {n2} = {n1 + n2}')
+
+
+# 에러명을 모르는데 에러메세지는 출력하고 싶다
+# try:
+#   명령어
+# except Exception as e
+#   e 출력 , 에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+
+# 에러명을 모를때
+# try:
+#   명령어
+# except:
+#   에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+
+# try:
+#     n1 = int(input('숫자1입력 ? .... '))
+#     n2 = int(input('숫자2입력 ? .... '))
+# except:
+#     pass
+# else:
+#     print(f'{n1} + {n2} = {n1 + n2}')
+# print('-'*30)
+
+
+# --------------------------
+# 에러처리 문법 3
+# try:
+#   명령어
+# except 에러코드 as e:
+#   print(e)
+#   에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+# finally:
+#   무조건 실행되는 명령어
+
+
+# 에러코드를 모를때
+# try:
+#   명령어
+# except Exception as e:
+#   print(e)
+#   에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+# finally:
+#   무조건 실행되는 명령어
+
+try:
+    f = open('data/result.txt', 'r', encoding='cp949')
+    # f = open('data/없는파일.txt', 'r')
+except Exception as e:
+    print(f'파일이 없습니다. \n\t\t 에러메세지: {e}')
+else:
+    print(f.read())
+    f.close()
+finally:
+    print('-'*20)
+    print('파일 읽기 완료')
+
+# try:
+#   명령어
+# except:
+#   에러처리명령
+# else:
+#   에러가 발생하기 않은 경우 명령어
+# finally:
+#   무조건 실행되는 명령어
+
+
+# --------------------------
+# 에러처리 문법 4 : 오류 회피
+# 에러 무시 : pass 키워드 사용
+
+# try:
+#   명령어
+# except:
+#   pass
+
+# try:
+#   명령어
+# except:
+#   pass
+# else:
+#   에러가 발생하기 않은 경우 명령어
+
+# try:
+#   명령어
+# except:
+#   pass
+# else:
+#   에러가 발생하기 않은 경우 명령어
+# finally:
+#   무조건 실행되는 명령어
+
+
+try:
+  you = '홍길동'
+  print(you)
+except:
+  pass
+else:
+  print(you*5)
+finally:
+  print('-'*5, '\n\t\t 예외처리 완료')
+
+# 에러 발생시
+# 예외처리 완료
+
+# 에러 미발생
+# 홍길동
+# 홍길동홍길동홍길동홍길동홍길동
+# -----
+# 		 예외처리 완료
+
+
+
+# --------------------------
+# 에러처리 문법 5
+# 여러개의 오류 처리하기
+# 먼저 발생한 오류 우선: 뒤에 오류는 실행되지 않음
+# 에러코드를 알고 있는 경우에 사용
+
+# try:
+#     명령실행 1
+#     명령실행 2
+#       ...
+# except 발생오류1:
+#     에러메세지 출력1
+# except 발생오류2:
+#     에러메세지 출력2
+# finally:
+#     테스트완료명령
+
+# 먼저 발생한 오류 우선: 뒤에 오류는 실행되지 않음
+# 테스트1
+# 결과 >>
+# 0으로 나눌 수 없습니다. division by zero
+# try:
+#     print(40/0)
+#     print(me)
+# except ZeroDivisionError as e:
+#     print('0으로 나눌 수 없습니다. %s' %e)
+# except NameError as e:
+#     print('변수가 정의되어 있지 않습니다 %s' % e)
+
+# 테스트2
+# 결과>>
+# 변수가 정의되어 있지 않습니다 name 'me' is not defined
+try:
+    print(me)
+    print(40 / 0)
+except ZeroDivisionError as e:
+    print('0으로 나눌 수 없습니다. %s' % e)
+except NameError as e:
+    print('변수가 정의되어 있지 않습니다 %s' % e)
+
+
+# --------------------------
+# 사용자정의 에러
+# 에러만들기1 : raise 문 이용
+# 일부러 에러 발생
+# if 조건식:
+#   raise Exception(오류 메세지)
+
+# 변수값이 음수이면 에러발생
+
+# try:
+#     x = int(input('숫자를 입력하세요'))
+# except:
+#     print('자료형을 변경할 수 없습니다.')
+# else:
+#     if x<=0:
+#         raise Exception('양수이어야 합니다.')
+#     else:
+#         print(x)
+
+
+# --------------------------
+# 에러만들기2 : raise 문 이용
+# 특정 기능을 구현하게 만드는 사용자에러
+# raise NotImplementedError
+# => 메소드 오버라이딩
+# 부모클래스에서 정의했던 메서드를 재정의한다.
+
+# raise NotImplementedError
+# 사용자정의 에러를 만들지 않은 경우
+# 부모 클래스 정의
+class Bird1:
+    def fly(self):
+        print('새가 나는 중')
+
+# 자식 클래스 정의
+class Dove1(Bird1):
+    pass
+
+# 인스턴스화
+dove1 = Dove1()
+dove1.fly()
+
+
+# raise NotImplementedError
+# 사용자정의 에러 정의
+# 부모 클래스 정의
+class Bird2:
+    def fly(self):
+        print('새가 나는 중')
+        # 자식클래스에서는 메소드 오버라이딩을 정의해야 한다.
+        raise NotImplementedError
+
+# 자식 클래스1 정의
+class Dove2(Bird2):
+    pass
+
+# 자식 클래스2 정의
+class Eagle2(Bird2):
+    # 메소드 오버라이딩
+    def fly(self):
+        print('독수리가 나는 중')
+
+# 인스턴스화
+eagle2 = Eagle2()
+eagle2.fly() # 독수리가 나는 중
+
+# 에러 발생
+# raise NotImplementedError
+# dove2 = Dove2()
+# dove2.fly()
+
+# -----------------------------------------
+# 퀴즈 1
+# 2개의 데이타값을 입력받은 후 나누기 명령을 실행한다.
+# 에러가 발생하면
+#   에러 메세지 출력 : '데이타 오류 ...'
+# 에러가 발생하지 않으면
+#   결과 수행 : n1 / n2 = ?
+
+
+
+# -----------------------------------------
+
+# 퀴즈 2
+# data_eng.txt 파일을 파일 변수로 저장한다.
+# data_eng.txt 파일이 없다면 (에러발생)
+#   메세지 출력. => '파일없음'
+# 파일이 있다면 (에러가발생하지 않는다면)
+#   총합과 평균을 구하여 출력한다.
+
+
+# -----------------------------------------
+# 퀴즈3
+# 매개변수값에 따라 다음과 같은 메세지를 출력한다.
+# 0과 같거나 0보다 작다
+# 0보다 크다
+# 매개변수값이 숫자가 아닌경우에는 오류를 무시하도록
+# try...except 문을 작성하여라
+
+'''
+# num이 양수, 0, 음수일때 메세지를 출력하는 함수 정의 
+def checkNumeric(num):
+    # 명령어
+
+>> 결과 
+checkNumeric(0)
+checkNumeric(30)
+checkNumeric('가나다')
+
+0과 같거나 0보다 작다
+0보다 크다
+'''
+
+
+
+
+# -----------------------------------------
+# 퀴즈4
+# 학생의 학년을 저장하는 변수 classYear값은
+# 1학년, 2학년, 3학년, 4학년 이어야한다.
+# 나머지 값은  raise Exception 을
+# 이용하여 오류를 발생시켜라
+
+# 결과>>
+# classYear = '1학년'
+# classYear = '8학년'   # Exception: 학년 정보가 올바르지 않습니다.
+# classYear = '삼학년'   # Exception: 학년 정보가 올바르지 않습니다.
+# classYear = '3학생'    # Exception: 학년 정보가 올바르지 않습니다.
+# classYear = '356'      # Exception: 학년 정보가 올바르지 않습니다.
+# print('학년 정보 - ', classYear[0])
+
+
+
+
+# ---------------------------------------
+
+# 에러만들기3 : Exception 내장 클래스 이용
+# 특정 상황에서 예외 발생
+
+# 1단계 : 사용자 에러코드 등록
+# Exception 내장 클래스를 상속받아
+# 임의의 에러명으로 클래스 생성
+# class 에러명클래스(Exception):
+#       명령문
+class MyError(Exception):
+    pass
+# 2단계: 함수 정의
+# '바보' 문자열이 변수에 값으로 지정되면
+# 정의된 myError() 발생
+
+def say(nickName):
+    if nickName == '바보':
+        raise  MyError()
+    else:
+        print('별명 ==>' , nickName)
+
+# 3단계 : 함수 호출
+say('천사') # 별명 ==> 천사
+# say('바보') # 에러 발생
+
+# 에러 발생
+# ...
+# __main__.MyError
+
+# ------------------------------
+# try.. except 문을 이용하여 MyError 예외처리
+try:
+    say('귀염둥이')
+    say('바보')
+except MyError:
+    print('금지된 단어입니다. 에러 발생')
+
+# 에러 발생
+# 금지된 단어입니다. 에러 발생
+
+# --------------------------
+# 에러 메세지 등록과정
+# 사용자오류 등록 :  에러 메세지 등록하여 사용하기
+# def __str__(self):
+#   return 메세지
+
+class MyErrorMessage(Exception):
+    def __str__(self):
+        return '금지된 단어로 사용 정지입니다.'
+
+def sayYourNickname(nickName):
+    if nickName == '바보':
+        raise MyErrorMessage()
+    else:
+        print('별명 ==>' , nickName)
+
+try:
+    sayYourNickname('똘똘이 스머프')
+    sayYourNickname('바보')
+except MyErrorMessage as e:
+    print(e)
+
+# 별명 ==> 똘똘이 스머프
+# 금지된 단어로 사용 정지입니다.
+
+
+# ----------------
+# CSV
+# data 폴더에서 csv 파일 확인
+# population.csv / data.csv /
+# 한국교통안전공단_대중교통 이용자유형별 이용인원(2017년).csv
+# => koreaTraffic.csv
+
+# 공공데이타포탈
+# https://www.data.go.kr/
+
+# CSV란?
+# Comma Seperate Value
+# 콤마(,)로 데이타가 분리된 파일
+
+# 내장 모듈 임포트
+import csv
+
+# CSV 파일 읽기
+# 파일변수 = open('csv파일경로', 'r', encoding='utf-8/cp949')
+# csv객체변수 = csv.reader(파일변수)
+
+f = open('data/data.csv', 'r', encoding='utf-8')
+csv_data = csv.reader(f)
+print(csv_data, type(csv_data));
+# <_csv.reader object at 0x010ED4F8>
+# <class '_csv.reader'>
+# csv 객체 출력 : csv파일에서 각행이 리스트로 생성
+# for i in csv_data:
+#     print(i, type(i))
+# # 리스트안에 리스트구조로 변경
+# # 주의 사항 : csv.reader(f) 는 한번만 읽어서 메모리에 로딩된다.
+data_list = []
+for i in csv_data:
+    data_list.append(i)
+print(data_list)
+print(f' 전체 행의 갯수 크기 : {len(data_list)}') # 13
+
+for i in data_list:
+    print(i, '컬럼갯수', len(i))
+
+# 첫번째 행은 ? => 컬럼 제목
+print(data_list[0])
+# 1행1열 출력
+print(data_list[0][0])
+# 마지막행의 마지막열 출력
+print(data_list[-1][-1])
+# kor, eng, mat, bio 과목의 데이터형 확인하기
+print(type(data_list[-1][-1]))
+# <class 'str'>
+
+# 'kor' 데이타만 정수형 리스트로 생성하여라
+#  1행은 제외 : 1행은 컬럼제목
+korList = []
+for i in range(1, len(data_list)):
+    korList.append(int(data_list[i][2]))
+
+# kor 데이타 리스트 확인
+print(korList)
+
+# kor 과목의 총합과 평균을 구해라
+print(f'kor 과목의 총점: {sum(korList)}')
+print(f'kor 과목의 평균: {sum(korList)/len(korList)}')
+print(f'kor 과목의 최고점: {max(korList)}')
+print(f'kor 과목의 최하점: {min(korList)}')
+
+# 퀴즈 :
+# 4과목('kor', 'eng', 'mat', 'bio')의 총점 구하기
+# 전체 평균 구하기
+
+
+# 국어 점수의 최고점을 받은 학생의 이름은?
+# 알고리즘
+# 국어점수의 최고점을 구한다. max()
+# 최고점의 인덱스를 구한다. 리스트이름.index()
+# 인덱스를 학생이름인덱스에 삽입한다.
+#  - 전체리스트[?]
+#  - data_list[?][1]
+
+
+#-----------------------
+#-----------------------
+
+
+import csv
+
+# with문을 이용하여 CSV 파일 읽기
+# with open('csv파일경로', 'r', encoding='utf-8/cp949') as 파일변수:
+#   csv객체변수 = csv.reader(파일변수)
+
+with open('data/population.csv', 'r') as f:
+    csv_data = csv.reader(f)
+    print(csv_data, type(csv_data));
+
+    # 행단위로 출력하기
+    # for row in csv_data:
+    #     print(row)
+
+    # 리스트 구조로 변경하기
+    result_list = []
+    for i in csv_data:
+        result_list.append(i)
+
+    print(result_list)
+    print(len(result_list)) # 행수 - 52
+    print(len(result_list[0])) # 열수 - 2
+
+    # 1행은 컬럼 제목이므로 삭제한 후 다른 리스트에 복사
+    result_list2 = result_list[1:]
+    print(len(result_list2)) # 행수 - 52
+
+    # 1컬럼은 미국 주 데이타 => state_list
+    # state_list를 정렬시켜라
+    state_list = []
+    for i in result_list2:
+        state_list.append(i[0])
+
+    print(state_list)
+    # ['Alabama', 'Alaska', 'Arizona',
+    # 'Arkansas', 'California', 'Colorado',
+    # 'Connecticut', 'Delaware', 'District of Columbia',
+    # 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+    # 'Illinois', 'Indiana', 'Iowa', 'Kansas',
+    # 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+    # 'Massachusetts', 'Michigan', 'Minnesota',
+    # 'Mississippi', 'Missouri', 'Montana', 'Nebraska',
+    # 'Nevada', 'New Hampshire', 'New Jersey',
+    # 'New Mexico', 'New York', 'North Carolina',
+    # 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+    # 'Pennsylvania', 'Rhode Island', 'South Carolina',
+    # 'South Dakota', 'Tennessee', 'Texas', 'Utah',
+    # 'Vermont', 'Virginia', 'Washington',
+    # 'West Virginia', 'Wisconsin', 'Wyoming']
+
+    # 역순 정렬
+    state_list.reverse()
+    print(state_list)
+
+    # 퀴즈0. 인구컬럼만 정수리스트로 새로 만들어라
+    # '4,780,131' => 4780131
+
+
+    # 퀴즈1 . 가장 많은 인구수는? max()
+
+
+    # 퀴즈2 . 가장 작은 인구수는? min()
+
+
+    # 퀴즈3. 가장 인구가 많은 주(State)는?
+
+
+    # 퀴즈4. 가장 인구가 적은 주(State)는?
+
+
+-------------------------------------------------
+# ordered dict 형태로 데이터 불러오기
+
+# 파일변수 = open('csv파일경로', 'r', encoding='utf-8/cp949')
+# csv객체변수 = csv.DictReader(파일변수)
+
+# with open('csv파일경로', 'r', encoding='utf-8/cp949') as 파일변수:
+#   csv객체변수 = csv.DictReader(파일변수)
+
+with open('data/koreaTraffic.csv', 'r') as f:
+    # csv_data = csv.reader(f)
+    csv_data = csv.DictReader(f)
+    print(csv_data, type(csv_data));
+    # <csv.DictReader object at 0x02D90190>
+    # <class 'csv.DictReader'>
+
+    # 행별 구조는 딕셔너리
+    # for row in csv_data:
+    #     print(row, type(row))
+
+    # {'구분': '서울', '일반인': '3711168', '어린이': '36098', '청소년': '259128', '기타': '417539'}
+    # <class 'dict'>
+
+    # 컬럼명 = 키값 으로 접근하기
+    # for row in csv_data:
+    #     print(row['구분'],' / ', row['일반인'], ' / ',
+    #           type(row['일반인']))
+
+    # 일반인 사용자의 가장 작은 값은?
+    list1 = []
+    list2 = []
+    for row in csv_data:
+        list1.append(int(row['일반인']))
+        list2.append(row['구분'])
+    print(list1)
+    print(type(list1[0]))
+    print(min(list1))
+
+    # 일반인 사용자가 가장작은 값의 인덱스는?
+    print(list1.index(min(list1)))
+    # 7
+
+    # 일반인 사용자가 가장 적은 도시는?
+    print(list2)
+    print(list2[list1.index(min(list1))])
+    # 세종
+
+# 일반인+청소년+어린이 합해서 지역별 사용자 구하기
+with open('data/koreaTraffic.csv', 'r') as f:
+    csv_data = csv.DictReader(f)
+    list_city = []
+    list_user = []
+    for row in csv_data:
+        list_city.append(row['구분'])
+        list_user.append(int(row['일반인'])+
+                         int(row['어린이'])+
+                         int(row['청소년']))
+
+    print(list_city)
+    print(list_user)
+
+    # 제주 사용자의 총 데이타값 출력 ?
+    print('제주 인덱스 =>', list_city.index('제주'))
+    print('제주의 사용자수 =>',
+          list_user[list_city.index('제주')])
+
+    # 딕셔너리 구조로 변경하기
+    # {도시명:인구사용자총수, ...}
+    # 빈 딕셔너리 만들기
+    korea_traffic_dict = {}
+    for i in range(0, len(list_city)):
+        # 딕셔너리변수[키] = 값
+        korea_traffic_dict[list_city[i]] = list_user[i]
+    print(korea_traffic_dict)
+    # {'서울': 4006394, '부산': 952394,
+    # '대구': 547517, '인천': 716825,
+    # '광주': 242717, '대전': 262872,
+    # '울산': 152289, '세종': 22677,
+    # '경기': 2816335, '강원': 84879,
+    # '충북': 117371, '충남': 148303,
+    # '전북': 118447, '전남': 120123, '경북': 165815,
+    # '경남': 253772, '제주': 63008}
+
+    # 강원 사용자의 총 데이타값 출력?
+    print(korea_traffic_dict['강원'])
+
+
+
+# 퀴즈 1) 시도대학별기업규모에따른취업자수.csv
+
+# 퀴즈 2) 1000명 이상인 회사에 들어간 취업자수가
+#        가장 많은 도시는?
+
+# csv 파일 쓰기1
+# 파일변수 = open('csv파일경로', 'w', encoding='utf-8/cp949', newline='')
+# csv객체변수 = csv.writer(파일변수)
+# csv객체변수.writerow(리스트/튜플...)
+# 파일변수.close()
+
+# csv 파일 쓰기2
+# with open('csv파일경로', 'w', encoding='utf-8/cp949', newline='') as 파일변수:
+    # csv객체변수 = csv.writer(파일변수)
+    # csv객체변수.writerow(리스트/튜플...)
+
+
+# csv 파일 쓰기3
+# 파일변수 = open('csv파일경로', 'w', encoding='utf-8/cp949', newline='')
+# field_list = 리스트(딕셔너리의 키로 생성된 리스트)
+# csv객체변수 = csv.DictWriter(파일변수, fieldnames=field_list)
+# csv객체변수.writerheader()
+# csv객체변수.writerow(딕셔너리)
+# csv객체변수.writerows(딕셔너리 리스트)
+# 파일변수.close()
+
+# csv 파일 쓰기4
+# with open('csv파일경로', 'w', encoding='utf-8/cp949', newline='') as 파일변수:
+    # field_list = 리스트(딕셔너리의 키로 생성된 리스트)
+    # csv객체변수 = csv.DictWriter(파일변수, fieldnames=field_list)
+    # csv객체변수.writerheader()
+    # csv객체변수.writerow(딕셔너리)
+    # csv객체변수.writerows(딕셔너리 리스트)
+
+
+# TSV 파일
+# CSV 파일과 비슷하지만,
+# 콤마 대신 Tab으로 컬럼을 분리하는 파일포맷
+# TSV 파일은 컬럼 delimiter만 차이가 나므로,
+# csv 모듈의 reader() 혹은 writer() 함수에서
+# delimiter='\t' 옵션만 지정해 주면 나머지는 CSV와 동일하다.
+
+# 파일변수 = open(url, 'r', encoding='cp949/utf-8')
+# csv객체변수 = csv.reader(파일변수, delimiter='\t')
+# 파일변수.close()
+
+# 파일변수 = open(url, 'w', encoding='cp949/utf-8')
+# csv객체변수 = csv.writer(파일변수, delimiter='\t')
+# csv객체변수.writerow(리스트/튜플...)
+# 파일변수.close()
+
+
+# ---------------------------------------
+# 교재 p291 참조
+# 정규표현식 (Regular Expression)
+# 유효성 검사
+# 특정 문자열이 특정 조건(패턴)에 맞는지 검사
+
+# 파이썬에서 정규표현식 모듈 => re (내장모듈)
+import re
+
+# re 객체의 속성과 메소드 확인
+print(dir(re))
+for i in dir(re):
+    print(i)
+
+# ---------------------------------------
+# 방식1
+# 패턴변수 = re.compile(패턴식)
+# 패턴변수.정규표현식메소드(문자열)
+
+# 정규표현식메소드
+# match(문자열) : 문자열 처음부터 검색 => 문자열 / None
+# search(문자열) : 문자열 전체 검색 => 문자열 / None
+# findall(문자열) : 정규식과 매치되는 문자열을 리스트로 반환
+# => 리스트 / []
+# finditer(문자열)
+# : 정규식과 매치되는 문자열을 반복가능한 객체로 반환
+# => 반복가능한객체. for문으로 개별 결과 확인
+
+patten1 = re.compile('^ab')
+print(patten1.findall('above')) # ['ab']
+print(patten1.findall('word')) # []
+print(patten1.search('above'))
+# <re.Match object; span=(0, 2), match='ab'>
+print(patten1.search('word')) # None
+print(patten1.finditer('above'))
+print(patten1.finditer('word'))
+# <callable_iterator object at 0x02E12FA0>
+obj1 = patten1.finditer('above')
+obj2 = patten1.finditer('word')
+for i in obj1:
+    print(i)
+# <re.Match object; span=(0, 2), match='ab'>
+for i in obj2:
+    print(i)
+# ---------------------------------------
+# 방식2
+# 문자열변수 = 문자열값
+# re.정규표현식메소드(패턴식, 문자열변수)
+# re.match(패턴식, 문자열변수) => 문자열
+# re.search(패턴식, 문자열변수) => 문자열
+# re.findall(패턴식, 문자열변수) => 리스트
+# re.finditer(패턴식, 문자열변수) => 반복가능객체
+
+# 정규표현식 패턴 - 대문자, 소문자, 숫자, 한글
+# [문자클래스스타일]  => 한글씩
+# [문자클래스스타일]+ => 단어단위
+# [a-z] : 영어소문자
+# [A-Z] : 영어대문자
+# [0-9] : 숫자
+# [가-흫] / [가-힣]: 한글
+
+txt = "가나다 009 python ?### 7834 파이썬 java WORD 784 ENGLISH"
+print(re.findall('[가-힣]', txt1))
+print(re.findall('[가-힣]+', txt1))
+print(re.findall('[a-z]', txt1))
+print(re.findall('[A-Z]+', txt1))
+print(re.findall('[0-9]+', txt1))
+print(re.findall('[a-zA-Z]+', txt1))
+# ['가', '나', '다', '파', '이', '썬']
+# ['가나다', '파이썬']
+# ['p', 'y', 't', 'h', 'o', 'n', 'j', 'a', 'v', 'a']
+# ['WORD', 'ENGLISH']
+# ['009', '7834', '784']
+# ['python', 'java', 'WORD', 'ENGLISH']
+print(re.finditer('[a-zA-Z]+', txt1))
+for i in re.finditer('[a-zA-Z]+', txt1):
+    print(i)
+    print(i.group()) # match 문자열
+    print(i.span()) # match 문자열의 시작과 끝 인덱스
+    print(i.start()) # match 문자열의 시작 인덱스
+    print(i.end()) # match 문자열의 끝 인덱스
+    print('-'*5)
+# <re.Match object; span=(8, 14), match='python'>
+# <re.Match object; span=(29, 33), match='java'>
+# <re.Match object; span=(34, 38), match='WORD'>
+# <re.Match object; span=(43, 50), match='ENGLISH'>
+
+# Match object 메서드
+# group() : 매치된 문자열을 리턴한다.
+# start() : 매치된 문자열의 시작 위치를 돌려준다.
+# end() : 매치된 문자열의 끝 위치를 돌려준다.
+# span() : 매치된 문자열의 시작,끝 위치를 튜플 형태로 돌려준다.
+
+
+# -----------------------------------------------
+# 정규표현식 패턴 - 대문자, 소문자, 숫자 : \지원문자
+# [\d] : 10진수, [0-9]와같음
+# [\D]: 10진수외 [^0-9]
+# [\s] :공백문자, [ \t\n\r\f\v]
+# [\S]: 공백 문자 외, [ \t\n\r\f\v]
+# [\w] : 영문자숫자 , [a-zA-Z0-9]
+# [\W]: 영문자숫자외 , [^a-zA-Z0-9]
+
+txt2 = '''
+            가나다 $ 009 python ?#
+            7834 파이썬 java WORD _+
+            784 ENGLISH'''
+print(re.findall('[\d]', txt2))
+print(re.findall('[\d]+', txt2))
+# ['0', '0', '9', '7', '8', '3', '4', '7', '8', '4']
+# ['009', '7834', '784']
+print(re.findall('[\s]', txt2))
+print(re.findall('[\S]+', txt2))
+['\n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '\n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+['가나다', '$', '009', 'python', '?#', '7834', '파이썬', 'java', 'WORD', '_+', '784', 'ENGLISH']
+
+print(re.findall('[\w]+', txt2))
+print(re.findall('[\W]+', txt2))
+# ['가나다', '009', 'python', '7834', '파이썬', 'java', 'WORD', '_', '784', 'ENGLISH']
+# ['\n            ', ' $ ', ' ', ' ?#\n            ', ' ', ' ', ' ', ' ', '+\n            ', ' ']
+# -----------------------------------------------
+# 비밀번호 유효성 검사
+# 비밀번호 조건
+# 전체길이는 6~12
+# 영어대소문자|숫자
+
+# checkPwd('abcd') => 비밀번호 길이가 적당하지 않다.
+# checkPwd('abcd+가나다') => 영어대소문자와 숫자만가능
+
+def checkPwd(pwd):
+    pattern = re.compile('[a-zA-Z0-9]+')
+    # print(pattern.findall(pwd))
+    # print(pattern.match(pwd))
+    # print(pattern.match(pwd).group())
+    # print(pattern.search(pwd))
+    # print(pattern.search(pwd).group())
+    # 전체길이 체크
+    if len(pwd)<6 or len(pwd)>12:
+        print('비밀번호 길이가 적당하지 않다.')
+        # return False
+        return '비밀번호 길이가 적당하지 않다.'
+    # 대소문자숫자 체크
+    elif pwd == pattern.match(pwd).group():
+         return '비밀번호 완료'
+         # return True
+    else:
+        return '영어대소문자와 숫자만가능'
+        # return False
+
+
+print(checkPwd('abcd'))
+# 비밀번호 길이가 적당하지 않다.
+# False
+print(checkPwd('abcd+가나다 ggg')) # 영어대소문자와 숫자만가능
+print(checkPwd('abc123gogo')) # True
+
+# -----------------------------------------------
+# 자릿수 지정 패턴 {}
+# [문자열]{n} n번 반복됨
+# {n,} n번 이상 반복됨
+# {n, m} 최소 n번 이상 최대 m 번 이하로 반복됨
+# x* : 문자열X가 0번이상 반복
+
+str = "abc 00ab 000abcd 00000abcd 012340abcd"
+print(re.findall('[0]{2}[a-bA-B]+', str))
+print(re.findall('[0]{2,}[a-bA-B]+', str))
+print(re.findall('[0]{0,3}[a-bA-B]+', str))
+# ['00ab', '00ab', '00ab']
+# ['00ab', '000ab', '00000ab']
+# ['ab', '00ab', '000ab', '000ab', '0ab']
+
+# -----------------------------------------------
+# 정규표현식 메타문자
+# | : OR 또는
+# +:바로 앞의 문자가 하나 이상 있음
+# ^:문자열의 처음을 나타냄
+# $:문자열의 끝
+# . :임의의 문자가 와도 됨
+# *:바로 앞의 문자가 없거나 하나 이상 있음
+# ?:앞의 문자가 없거나 하나임
+
+# 휴대폰번호 유효성검사
+# 숫자3자리-숫자4자리-숫자4자리
+
+txt2 = '''010-7777-1234 00-6785-가나다 
+        011-5678-8989 01156788989
+        333-123 abc-9990-0000 554-8488-7878 
+        045-5678-4567 016-8888-9090
+        017-7785-7775'''
+
+# 숫자3자리-숫자4자리-숫자4자리
+print(re.findall('[0-9]{3}-[0-9]{4}-[0-9]{4}', txt2))
+
+# 숫자3자리(010/011/016/017)-숫자4자리-숫자4자리
+print(re.findall('01[0|1|6|7]-[0-9]{4}-[0-9]{4}', txt2))
+'''
+['010-7777-1234', '011-5678-8989', '554-8488-7878', '045-5678-4567', '016-8888-9090', '017-7785-7775']
+['010-7777-1234', '011-5678-8989', '016-8888-9090', '017-7785-7775']
+'''
+
+# 입력받은 번호가 모바일폰형식이면 메세지 출력
+
+userPhone = input('핸드폰 번호를 입력해주세요. '
+                  '\n(예:000-0000-0000)\n')
+mobilePattern = '01[0|1|6|7]-[0-9]{4}-[0-9]{4}'
+# print(re.search(mobilePattern, userPhone))
+obj = re.search(mobilePattern, userPhone)
+if obj != None:
+    print(obj.group())
+else:
+    print('모바일폰 번호 양식이 아니다.')
+
+# 퀴즈 : 리스트에서 주민등록번호 양식에 맞는 데이타를 출력하여라
+# 주민등록번호 패턴
+# 6자리숫자-[1|2|3|4]6자리숫자
+quizList = [ '020-28261', '564873-3300998',
+'가나다-3300998', '564873-8800998',
+'123456-1234567', 'abc456-1234567']
+
+
+# -----------------------------------------------
+# 그룹핑이용
+# 정규표현식의 패턴을 그룹화 : group(index)
+juminPattern = '([0-9]{6})-([1|2|3|4][0-9]{6})'
+result = re.match(juminPattern, '123456-1234567')
+print(result)
+print(result.group())
+print(result.group(1))
+print(result.group(2))
+# <re.Match object; span=(0, 14), match='123456-1234567'>
+# 123456-1234567
+# 123456
+# 1234567
+
+# 퀴즈 : 주민번호데이타에서 주민번호뒷자리는 '*******' 마킹하기
+quizList2 = [ '123456-1234567', '883456-3234567',
+               '가나다-3300998', '6666653423-3300998'
+               '673456-3234567', '903156-3234567']
+
+
+
+
+# -----------------------------------------------
+# 정규표현식 컴파일 옵션
+# re.compile(정규표현식, re.컴파일옵션)
+# S : dotall 줄바꿈문자 포함
+# I : ignorecase  대소문자 관계없이 매치
+# M : multiline 여러줄과 매치한다
+# v : verbose 모드 이용. 여러줄 정규식과 주석 사용 가능
+
+
+
+
+
+
+
+
+
+
+
+
+
+

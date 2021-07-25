@@ -1,0 +1,618 @@
+# random 난수 함수들
+# 외장모듈 필요
+# import random
+# random.randint(start, end)
+# : start~end 사이의 정수 난수
+# random.choice(리스트)
+# : 리스트에서 랜덤하게 뽑는다.
+# random.shuffle(리스트)
+# : 리스트를 랜덤하게 섞는다.
+
+import random
+print('1~10 사이에서 숫자 뽑기1 = ', random.randint(1,10))
+print('1~10 사이에서 숫자 뽑기2 = ', random.randint(1,10))
+print('1~10 사이에서 숫자 뽑기3 = ', random.randint(1,10))
+
+# 1~10 사이에서 숫자 뽑기1 =  3
+# 1~10 사이에서 숫자 뽑기2 =  8
+# 1~10 사이에서 숫자 뽑기3 =  6
+
+lottoList = ['꽝', '미니쿠퍼', '1억원(세금없음)', '금 10돈', '스타벅스 10만원 상품권',
+              '캠핑카']
+
+print('행운권 확인하기1 ', random.choice(lottoList))
+print('행운권 확인하기2 ', random.choice(lottoList))
+print('행운권 확인하기3 ', random.choice(lottoList))
+# 행운권 확인하기1  캠핑카
+# 행운권 확인하기2  금 10돈
+# 행운권 확인하기3  스타벅스 10만원 상품권
+
+stList = ['김철수', '홍길동', '기대주', '이동백', '하민수']
+random.shuffle(stList)
+print(stList)
+print('오늘 청소 당번은? ',stList[0:2] )
+
+random.shuffle(stList)
+print(stList)
+
+print('내일 청소 당번은? ', stList[0:2])
+'''
+['기대주', '하민수', '이동백', '김철수', '홍길동']
+오늘 청소 당번은?  ['기대주', '하민수']
+['홍길동', '이동백', '기대주', '김철수', '하민수']
+내일 청소 당번은?  ['홍길동', '이동백']
+'''
+
+#-----------------------------------------
+# filter(함수명/lambda 함수, 리스트/튜플),
+# map(함수명/lambda 함수, 리스트/튜플),
+# reduce(함수명/lambda 함수, 리스트/튜플)
+# 정의된 사용자정의함수, 람다함수를  리스트 데이타 각각에 적용한다.
+
+# filter()
+# filter(함수명/lambda 함수, 리스트/튜플)
+# 사용할 함수는 결과값이 True/False
+# 함수를 적용하여 리스트/튜플의 data에서 True 인것만 Return
+# => 참인조건의 리스트만 출력
+
+print('퀴즈:리스트 중 짝수만 출력하기 ')
+# 퀴즈
+# 리스트 중 짝수만 출력하기 = filter() 함수 이용
+# 짝수인지 판독하는 함수 정의
+# 리스트 정의
+# filter() 함수 적용 => filter 객체
+# filter 객체를 리스트화
+
+# filter()를 사용하지 않은 경우 일반 함수 적용
+def oddPrint(list):
+    resultList = []
+    for i in list:
+        if i%2 == 0:
+           resultList.append(i)
+    return resultList
+
+print(f'짝수만 출력(일반함수) : {oddPrint([10, 30, 5, 9, 18])} ')
+# 짝수만 출력 : [10, 30, 18]
+print('짝수만 출력(filter() 함수)')
+# filter 함수에 사용할 함수 정의
+# 리스트 각각의 요소에 적용할 함수
+# 결과값은 True / False
+def oddPrint2(n):
+    if n%2 == 0:
+        return True
+print(oddPrint2(10)) # True
+print(filter(oddPrint2, [10, 30, 5, 9, 18])) # filter object at 0x000001D5879C69E8>
+for i in filter(oddPrint2, [10, 30, 5, 9, 18]):
+    print(i)
+'''
+10
+30
+18
+'''
+print(list(filter(oddPrint2, [10, 30, 5, 9, 18])))
+# [10, 30, 18]
+
+print('짝수만 출력(filter()와 lambda 함수)')
+# 함수변수 = lambda 인자:명령
+# 함수변수(인자)
+f_odd = lambda x:x%2 == 0
+print('람다 호출 = ', f_odd(40)) # True
+# filter(lambda 인자:명령, 적용할데이타리스트) => filter객체
+print(filter(lambda x:x%2==0, [10, 30, 5, 9, 18])) # <filter object at 0x0000022A90FB69E8>
+print(list(filter(lambda x:x%2==0, [10, 30, 5, 9, 18])))
+# [10, 30, 18]
+for i in filter(lambda x:x%2==0, [10, 30, 5, 9, 18]):
+    print(i)
+
+'''
+10
+30
+18
+'''
+
+print('\n퀴즈:숫자 리스트에서 양수만 출력하기 ')
+numlist = [10, -30, 20, 5, -100]
+# 양수인지 판독하는 함수 정의
+print('양수만 출력(일반 함수)')
+def positive_num(list):
+    result=[]
+    for i in list:
+        if i>0:
+            result.append(i)
+    return result
+print(positive_num(numlist))
+# [10, 20, 5]
+
+print('양수만 출력(filter() 함수)')
+def positive(n):
+    return n>0
+print(positive(-10)) # False
+print(positive(10)) #True
+# filter() 함수 적용
+print(filter(positive, numlist)) # <filter object at 0x01DAFB30>
+# 리스트화 : 양수만 추출
+print(list(filter(positive, numlist))) # [10, 20, 5]
+# for .. in 으로 출력
+for i in filter(positive, numlist):
+    print(i)
+'''
+10
+20
+5
+'''
+
+print('양수만 출력(filter(), lambda 함수)')
+f_positive = lambda x:x>0
+print(f_positive(-7)) # False
+print(f_positive(7)) # True
+print(list(filter(lambda x:x>0, numlist)))
+for i in filter(lambda x:x>0, numlist):
+    print(i)
+'''
+[10, 20, 5]
+10
+20
+5
+'''
+
+print('\n퀴즈:문자열에서 숫자만 리스트로 만들기  ')
+message = 'ab4690cfvg342가1나1다0'
+print('숫자만 출력(일반 함수)')
+def numList(txt):
+    result = []
+    for i in range(0,len(txt)):
+       if txt[i].isdigit():
+           result.append(txt[i])
+    return result
+print(numList(message))
+# ['4', '6', '9', '0', '3', '4', '2', '1', '1', '0']
+# 위의 일반 함수를 filter(함수명, 리스트) 와
+# filter(lambda 함수정의, 리스트) 형태로 변경하여 보세요
+# 문자열을 리스트로 변경하기
+# 문자 사이에 공백 삽입하기 : ' '.join(문자열변수)
+print(' '.join(message))
+# 문자열에서 공백을 기준으로 리스트 생성
+# 문자열.split()
+print(' '.join(message).split())
+# a b 4 6 9 0 c f v g 3 4 2 가 1 나 1 다 0
+# ['a', 'b', '4', '6', '9', '0', 'c', 'f', 'v', 'g', '3', '4', '2', '가', '1', '나', '1', '다', '0']
+messageList = ' '.join(message).split()
+print('숫자만 출력(filter() 함수)')
+def digitPrint(c):
+    return c.isdigit()
+print(list(filter(digitPrint, messageList)))
+# ['4', '6', '9', '0', '3', '4', '2', '1', '1', '0']
+print('숫자만 출력(filter(), lambda 함수)')
+print(list(filter(lambda x:x.isdigit(), messageList )))
+# ['4', '6', '9', '0', '3', '4', '2', '1', '1', '0']
+
+
+
+# ------------------------------------------------------
+# map() 함수
+# map(정의된함수나 lambda함수,데이타(리스트,튜플))
+# -> map오브젝트 생성
+# list(map(정의된함수나 lambda함수, 데이타(리스트,튜플)))
+# 데이타 요소를 정의된함수의 결과값으로 리턴한다.
+# 결과값을 리스트 요소로 추가
+#
+print('\n퀴즈:리스트의 제곱을 구해서 새로운 리스트로 만들기  ')
+numlist2 = [1,2,3,4] # 결과 => [1, 4, 9, 16]
+
+print('제곱값으로 구성된 리스트 출력(일반 함수)')
+# 제곱을 구하는 함수 정의
+def power_fn1(list):
+    result = []
+    for i in list:
+        result.append(i**2)
+    return result
+print(power_fn1(numlist2))
+# [1, 4, 9, 16]
+print('제곱값으로 구성된 리스트 출력(map() 함수)')
+# map() 사용할 제곱을 출력하는 함수 정의
+def power_f2(value):
+    return value**2
+print(power_f2(3)) # 9
+print(map(power_f2, numlist2)) # map 오브젝트로 출력
+# 리스트화 해서 출력
+print(list(map(power_f2, numlist2)))
+
+print('제곱값으로 구성된 리스트 출력(map(), lambda함수)')
+f_multy = lambda x:x**2
+print(f_multy(2)) # 4
+print(list(map(lambda x:x**2, numlist2)))
+# [1, 4, 9, 16]
+
+print('\n퀴즈:두 리스트에서 인덱스가 '
+      '같은 값을 서로 곱한 후 리스트로 만들기  ')
+list1 = [2,3,7]
+list2 = [4,5,9]
+# => [8, 15, 63]
+print('인덱스가 같은 두 수 곱하기 (일반 함수)')
+def multyply_n(list1, list2):
+    resultList = []
+    for i in range(0, len(list1)):
+        resultList.append(list1[i]*list2[i])
+    return resultList
+print(list1, list2, '\n =>', multyply_n(list1, list2))
+print('인덱스가 같은 두 수 곱하기 (map 함수)')
+def multyply(x,y):
+    return x*y
+print(list1, list2, '\n =>',
+      list(map(multyply, list1, list2)))
+
+print('인덱스가 같은 두 수 곱하기 (map(), lambda 함수)')
+f_multy2 = lambda x,y:x*y
+print(f_multy2(2,4)) # 8
+print(list1, list2, '\n =>',
+      list(map(lambda x,y:x*y, list1, list2)))
+
+# print('\n'*2, '-'*30)
+
+
+
+# ----------------------------------------------------------
+# reduce()
+# 리스트의 요소에 함수를 적용해 1개의 결과를 리턴한다.
+# reduce(람다나 정의한 함수, 리스트나 튜플)
+# 외장함수로 import functools 모듈 임포트 명령 필요
+# 모듈내의 함수 사용1?
+# import functools
+# functools.reduce(옵션)
+# 모듈내의 함수 사용2? = 별칭 지정
+# import functools as f
+# f.reduce(옵션)
+
+print('\n퀴즈:리스트의 모든 합 구하기 ')
+# 1~10으로 구성된 리스트 생성 : range()
+numlist3 = list(range(1,11))
+print(numlist3) # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print('\n일반함수 이용 ')
+def sumList(list):
+    sum = 0
+    for i in list:
+        sum += i
+    return sum
+print(sumList(numlist3)) # 55
+print('\nreduce() 이용 ')
+import functools as f # 모듈 임포트
+def add(x,y):
+    return x+y
+print(f.reduce(add, numlist3)) # 55
+
+print('\nreduce(), lambda 이용')
+f_add = lambda x,y:x+y
+print(f_add(1,2)) # 3
+print(f.reduce(lambda x,y:x+y, numlist3)) # 55
+
+
+
+numlist10 = [True, 1, 'Yes', 2, 3, 5, 6, 'a']
+def sumList2(list):
+    sum = 0
+    for i in list:
+        if str(i).isdigit():
+            sum += i
+    return sum
+print(sumList2(numlist10))
+
+f_addNum = lambda x,y: x+y if isinstance(x, int) and  isinstance(y, int) else 0
+
+print(isinstance(10, int)) # True
+
+print(' f_addNum(10, 20) = ', f_addNum(10, 20))
+print(' f_addNum(10, "20") = ' , f_addNum(10, '20'))
+
+
+# print(test(2,True))
+# print(test(2,5))
+# # print(f.reduce(lambda x:x.isdigit(), numlist10)
+
+
+
+
+# -----------------------------------
+# -----------------------------------
+# 파일입출력함수
+
+# 교재 p171
+# 하위 폴더 data 확인
+
+# 현재 작업폴더 위치 확인하기
+# python.exe 위치 , 현재 파이썬 파일 정보 출력
+import os
+print(os.getcwd())
+
+
+# 파일입출력
+# 파일변수  = open(파일경로, 'r'/'w'/'a',
+#                    encoding='utf-8/cp949')
+# 파일변수.파일입출력함수(옵션)
+
+# 파일읽기
+# 파일변수 생성
+# 파일변수  = open(파일경로, 'r',
+#                     encoding='utf-8/cp949')
+# 파일변수.read() : 파일전체 문자열 구조 =>  문자열
+# 파일변수.readline() : 파일에서 첫줄만 읽기 => 문자열
+# 파일변수.readlines() : 각행이 리스트 구조로 변경 => 리스트
+
+
+# ------------------------
+# 문서 읽기1 - 파일변수.read()
+f = open('data/Yesterday.txt', 'r')
+print(f)
+#  io 객체 출력 - 파일의 인코딩과 경로 확인
+#  파일경로가 올바르지 않으면 FileNotFoundError
+# 문서 전체가 출력
+data = f.read()
+print(data, '\n\n',type(data))
+# <class 'str'> 문자열
+# 첫글자만 추출
+print(f'첫 글자 => {data[0]}') # 첫 글자 => Y
+# 10글자만 추출
+print(f'10글자만 추출 => {data[0:10]}')
+# 10글자만 추출 => Yesterday
+
+# 문서는 몇개의 어구로 구성되어 있을까?
+# 단어별로 구성해서 리스트 구조로 변경
+# 문자열변수.split() => 공백기준으로 리스트로 변경
+dataList = data.split()
+# 3개만 출력
+print(type(dataList))
+print(dataList[:3])
+print('단어 수? => ', len(dataList) )
+'''
+['Yesterday', 'All', 'my']
+단어 수? =>  134
+'''
+# 파일 닫기 : 파일변수.close()
+f.close()
+
+
+
+# ------------------------
+# 문서 읽기2 - 파일변수.readline()
+# 파일변수 = open('파일경로', 'r')
+# 첫번째 줄만 출력하기 -> 문자열
+# 변수 = 파일변수.readline()
+
+f = open('data/sample.txt','r')
+data2 = f.readline()
+print('\n\n 첫줄만 출력 : \n\n' , data2, '\n',type(data2))
+f.close()
+
+
+
+
+# ------------------------
+# 문서 읽기3 - readlines()
+# 파일변수 = open('파일경로', 'r', encoding='utf-8/cp949')
+# 한줄씩 읽어서 리스트 요소로 저장
+# 리스트이름 = 파일변수.readlines()
+f = open('data/sample.txt','r')
+data3 = f.readlines()
+print('\n 전체 출력 : \n\n' , data3, '\n',type(data3))
+# 3개의 요소만 출력
+print(data3[0:3],'\n\n', type(data3))
+# 리스트 요소 단위로 5줄만 출력하기
+for i in data3[0:5]:
+    print(i)
+# 파일닫기
+f.close()
+
+#-------------
+# 퀴즈
+# 파일의 단어 전체갯수와 포함된 단어 중 5개만
+# 표시되는 함수를 정의하여라. (중복 제거)
+'''
+def printWord(fileURL, op):
+    #명령어 기입
+'''
+# >> 함수호출
+# printWord('data/Yesterday.txt')
+# >> 결과값
+# 파일명 : data/Yesterday.txt
+# 단어 갯수 : 134
+# 단어 5개 출력
+# ['Yesterday', 'All', 'my' ... ]
+
+
+print('퀴즈 : 파일의 단어전체수와 3개의 단어만 출력하기 ')
+def printWord(fileUrl, op):
+    f = open(fileUrl,'r', encoding=op)
+    data = f.read()
+    myList = data.split()
+    print('*'*30)
+    print('파일명 : ', fileUrl)
+    print( '단어 갯수 : ',len(myList) )
+    print( '단어 3개 출력' )
+    print(myList[0:3])
+    f.close()
+
+printWord('data/Yesterday.txt', 'cp949')
+printWord('data/color.txt', 'utf-8')
+'''
+퀴즈 : 파일의 단어전체수와 3개의 단어만 출력하기
+******************************
+파일명 :  data/Yesterday.txt
+단어 갯수 :  134
+단어 3개 출력
+['Yesterday', 'All', 'my']
+******************************
+파일명 :  data/color.txt
+단어 갯수 :  566
+단어 3개 출력
+['GREEN을', '좋아하는', '사람']
+'''
+
+# 퀴즈
+# data_eng.txt, data_kor.txt
+# 파일안의 데이타의 합과 평균을 구하는
+# 함수를 정의하고 아래와 같이 출력하여라
+# 함수 정의 => 파일읽기 => 리스트화
+# => 리스트의 값 더하기(숫자형데이터로 변환) : 합
+# => 합 / 리스트갯수 : 평균
+
+# '''
+# # 함수 호출
+# sumAvr('data/data_eng.txt', 'cp949')
+# sumAvr('data/data_kor.txt', 'cp949')
+#
+# >> 결과
+#
+# 파일명 =  data/data_eng.txt
+# 데이터 수 =  12
+# 합 =  933
+# 평균 = 77.75
+#
+# ----------
+# 파일명 =  data/data_kor.txt
+# 데이터 수 =  12
+# 합 =  892
+# 평균 = 74.33
+#
+# '''
+def sumAvr(fileUrl, op):
+    f = open(fileUrl,'r', encoding=op)
+    dataList = f.readlines() #리스트화
+    total = 0
+    # 합계 구하기
+    for i in dataList:
+        score = int(i) # 데이터형 변경
+        total += score
+    # 평균 구하기
+    avr = total/len(dataList)
+    print('\n\n','-'*10)
+    print('파일명 = ', fileUrl)
+    print('데이터 수 = ', len(dataList))
+    print('합 = ', total)
+    print('평균 = %.2f'%(avr))
+    f.close()
+sumAvr('data/data_eng.txt', 'cp949')
+sumAvr('data/data_kor.txt', 'cp949')
+
+
+# ---------------------------------------------
+# --------------------------------------------
+
+# 파일 쓰기
+# 새로운 파일이 생성되면서 내용이 추가된다.
+# 기존에 파일이 있다면 덮어쓰기된다.
+# 파일변수 = open( 생성파일경로, 'w', encoding='cp949/utf-8')
+# 파일변수.write(문자열)
+# 파일변수.close()
+
+# 빈파일 만들기
+f = open('data/test1.txt','w')
+print(' 파일이 생성되었습니다. ')
+f.close()
+# test1.txt 파일이 생성되었는지 탐색기에서 확인
+
+# 파일 생성후 내용 추가하기
+# 줄바꿈은 \n 이용
+f = open('data/test1.txt','w')
+print(' 파일이 생성되었습니다. ')
+f.write('-'*10)
+f.write('\n 테스트 중입니다.\n')
+f.write('-'*10)
+# 10 줄 추가하기
+for i in range(1,11):
+    f.write('\n %d 번째 줄입니다. ' % (i) )
+f.close()
+
+# 리스트요소를 정의한 후
+# 리스트요소를 파일에 행단위로 저장한다.
+myFoodList = ['라면', '김치전', '모밀', '초밥', '샐러드']
+line = open('data/myFoodList.txt','w')
+line.write('\n음식 메뉴\n')
+for i in myFoodList:
+    print(i)
+    data = i+'\n' # 개행문자 \n 삽입
+    line.write(data)
+    print('내용이 추가되었습니다.')
+line.close()
+
+# ------------------------------
+# 파일1의 특정 부분을 파일2에 저장하기
+# Yesterday.txt 파일에서 5줄만 추출해서
+# resultYesterday.txt 파일에 저장하기
+# 파일변수1 = open(읽을파일경로, 'r')
+# 리스트변수 = f.readlines()
+# 파일변수2 = open(저장할파일경로, 'w')
+# for i in ?:
+#   파일변수2.write(i)
+# 파일변수1.close()
+# 파일변수2.close()
+f1 = open('data/Yesterday.txt','r')
+f2 = open('data/resultYesterday.txt','w')
+resultList = f1.readlines() # 리스트에 저장
+cnt = 1
+for i in resultList[0:5]:
+    dataLine = str(cnt) + '행 => ' + i + '\n' #개행문자 삽입
+    f2.write(dataLine)
+    cnt += 1
+    print('내용이 추가되었습니다.')
+f1.close()
+f2.close()
+
+# -------------------
+# 내용추가하기
+# 기존 파일에 내용이 추가된다.
+# 파일변수 = open( 생성파일경로, 'a', encoding='cp949/utf-8')
+# 파일변수.write(문자열)
+# 파일변수.close()
+
+f = open('data/test1.txt','a')
+f.write('\n\n 내용 추가 테스트1')
+print('새로운 내용이 추가되었습니다.')
+f.close()
+
+f = open('data/test1.txt','a')
+f.write('\n\n 내용 추가 테스트2')
+print('새로운 내용이 추가되었습니다.')
+f.close()
+
+# ------------------
+# with 문과 파일 입출력
+# 파일.close() 를 사용할 필요가 없다.
+# with open(파일경로, 'a'/'w'/'r', encoding='uft-8/cp949')
+#  as 파일변수:
+#   명령문
+
+# with 문을 이용한 파일 읽기
+with open('data/Yesterday.txt','r') as f:
+    result = f.read()
+    print(result[:10])
+print('\n\n파일 읽기 테스트 완료 \n\n')
+
+# with문을 이용한 파일쓰기
+with open('data/test2.txt','w') as f:
+    f.write('파일 쓰기 테스트 \n'*10)
+print('\n\n파일 쓰기 테스트 완료 \n\n')
+
+# with문을 이용한 내용 추가
+with open('data/test2.txt','a') as f:
+    f.write('내용 추가 테스트 \n'*3)
+
+print('\n\n 내용 추가 테스트 완료 \n\n')
+
+# Delete 구현 1
+# 파일변수.write() => 파일은 존재하고 안에 내용은 삭제
+# Delete 구현 2 => 파일 삭제
+'''
+import os
+os.remove(삭제파일경로)
+'''
+with open('data/remove.txt','w') as f:
+    f.write('')
+print('\n\n remove.txt 파일 생성 완료  \n\n')
+
+import os
+ans = input('remove.txt 파일 삭제?(y)').strip()
+print(ans)
+if ans == 'y':
+    os.remove('data/remove.txt')
+    print('파일이 삭제되었습니다.')
+
+

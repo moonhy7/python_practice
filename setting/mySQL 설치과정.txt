@@ -1,0 +1,29 @@
+1) 다운로드 페이지 
+https://dev.mysql.com/downloads/installer/
+2) Windows (x86, 32-bit), MSI Installer 프로그램 다운로드 
+(mysql-installer-community-8.0.18.0.msi) 
+415m  [Download]
+3) 회원가입페이지에서 
+  No thanks, just start my download 클릭해서 
+   다운로드한다. 
+4) 다운로드 후 mysql-installer-community-8.0.18.0.msi 
+  마우스 우측 버튼 클릭후 [설치]
+5) (중요함) 설치 선택화면에서 
+    (Full) 로 선택 
+    Sample 파일도 같이 설치해야함 
+6) 비주얼 스튜디오 설치되어 있지 않다면
+    [Check Requirements] 화면에서 첫번째 화면  Microsoft ~ 
+    선택 후 비주얼 스튜디오 설치하기 
+     라이센스 동의 화면 에서 동의 후 설치 
+7) MySQL Installer 화면에서 
+   [Next] 설치
+8) 비번 설치 
+   1234 권장 까먹으면 힘듬 
+9) 입력한 비번을 넣고 [Check]
+10) 설치후 워크벤치 실행 확인 
+11) [Schemas] 탭에서 'world' 데이타베이스 목록이 보이는지 확인 
+12) 환경 설정 
+[Edit]-[Preferences] 
+Fonts ~ :  폰트 크기 등 설정 
+[SQL Editor]-[Query Editor] 에서 [USE UPPERCASE ~] 선택 
+

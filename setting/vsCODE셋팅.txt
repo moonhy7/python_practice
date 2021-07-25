@@ -1,0 +1,51 @@
+[ VSCODE를 이용한 개발환경 설정 ]
+
+1) VSCODE 프로그램 다운로드 및 설치
+https://code.visualstudio.com
+
+다운로드 받은 프로그램 더블 클릭해서 기본값으로 설치 
+: VSCodeUserSetup-x64-1.51.1.exe
+
+2) VSCODE 프로그램 실행 후 
+작업폴더 생성 및 워크스페이스 등록  
+ [File]-[Add Folder To workspace]
+
+  예) c:/pyclass 
+ 
+
+3) VScode Extension 설치
+사이드바 보이기 감추기 - [Ctrl]+[B]
+왼쪽에 위치한 사이드바에서 맨아래 클릭 
+[Ctrl]+[Shift]+[X]
+- Python 
+- Python for VSCode
+- open-in-browser : 단축키로 웹브라우저 실행 
+- Prettier - Code formatter
+
+---------------------------
+// vsCode 프로그램에서 파이썬 실행하기 
+
+1) 왼쪽 탐색기영역에서 
+    파일을 저장하고하는 폴더 선택 
+    마우스우측 버튼 클릭 후 New file
+    파일명.py 
+2) 파이썬 파일 실행은?
+   - 1시방향 play 버튼 
+   - 터미널 창에서 
+     python 파일명.py
+
+---------------------------
+// 파이썬 설치 모듈 확인하기 
+[Terminal]-[New Terminal] 
+[Terminal] 창에서 
+>> pip list
+- Flask 
+- PyMySQL  
+
+// 파이썬 모듈 설치하기 
+>> pip install 모듈명 
+예) pip install PyMySQL 
+
+
+
+

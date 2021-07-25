@@ -1,0 +1,893 @@
+
+# --------------------
+'''
+- 클래스 생성 
+- 인스턴스화 
+- isinstance() 
+- 생성자 함수(속성)
+- 클래스 메소드 
+- 클래스 변수 
+- 상속 
+- issubclass(자식클래스,부모클래스)
+- id(객체이름) : 주소값 확인하기
+- dir(인스턴스명)
+- 메소드 오버라이딩
+'''
+
+
+
+# --------------------
+# 교재 p183
+
+# 클래스 : 특별한 자료구조
+# 관련 키워드 => OOP, 인스턴스=객체
+# 기본자료형(숫자, 문자열, 불른)
+# 콜렉션형 (리스트, 집합, 튜플, 딕셔너리)
+# 클래스 ( 속성, 함수 ...) => 틀
+# 인스턴스=객체=Object
+#   => 클래스에 의해서 만들어진 산출물
+# 클래스란? 설계도/틀 -> 붕어빵틀
+# => 인스턴스(객체) -> 붕어빵
+
+# 클래스 생성 문법
+# 클래스이름은 첫글자는 대문자로 지정
+# class 클래스이름:
+#   명령문
+
+# pass :
+# 명령어가 필요할때 삽입. 실행은 없음
+
+# 빈 함수 생성
+# def function_test(인자):
+#     return True
+
+# 빈 클래스 생성
+class Test:
+    pass
+
+
+# 인스턴스 생성하기
+# 인스턴스명은 첫글자는 소문자로 지정
+# 인스턴스변수 = 클래스이름()
+# isinstance(인스턴스변수, 클래스이름)
+# 특정클래스에 의해서 생성된 인스턴스가 맞는지 출력
+# True / False 로 출력
+
+t1 = Test()
+print(t1, type(t1))
+# <__main__.Test object at 0x02FC1FD0> <class '__main__.Test'>
+# 클래스 목록 확인 Test
+
+# 관계확인 (클래스에 의해서 생성된 인스턴스 맞는지 여부 확인)
+# isinstance(인스턴스명, 클래스명)
+testList = []
+print(isinstance(t1, Test)) # True
+print(isinstance(testList, Test)) # False
+
+
+# 생성자 함수 (Constructor)
+# => 속성값 정의
+# 사각형에 관련된 클래스 속성 => 가로, 세로, 색상, 무늬
+# 사람에 대한 클래스 속성 => 이름, 성별, 키, 몸무게, 출신지
+# 붕어빵에 대한 클래스 속성 => 재료, 칼로리, 크기, 생성날짜
+
+# 생성자함수 문법
+# class 클래스명:
+#   def __init__(self, 인자):
+#       self.인자 = 인자값
+#       self.인자 = (인자값1, 인자값2,...) # 튜플형태 
+
+# 인스턴스 생성
+# 인스턴스명 = 클래스이름(인자값,..)
+
+# 실제 속성값 출력
+# 인스턴스명.속성
+
+# 사각형에 대한 클래스 생성
+# 가로, 세로
+class Square:
+    # 생성자 함수 - 속성
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.color = "red"
+        self.style = ("줄무늬","모서리 둥금","도트 무늬")
+
+
+# 사각형 인스턴스 생성
+s1 = Square(50, 100)
+print(isinstance(s1, Square))
+# 사각형 인스턴스의 가로와 세로 속성 출력
+print(f'가로 길이 - {s1.width}')
+print(f'세로 길이 - {s1.height}')
+print(f'색상 - {s1.color}')
+print(f'스타일1 - {s1.style[0]}')
+print(f'스타일2 - {s1.style[1]}')
+print(f'스타일3 - {s1.style[2]}')
+'''
+True
+가로 길이 - 50
+세로 길이 - 100
+색상 - red
+스타일1 - 줄무늬
+스타일2 - 모서리 둥금
+스타일3 - 도트 무늬
+'''
+
+
+# -------------------
+# 클래스 메소드란? => 동작/ 기능
+# def 메소드이름(self,인자):
+#   명령어
+#   return 값
+
+# 메소드 호출
+# 인스턴스명.메소드이름(인자)
+
+# Bread 클래스 생성하기
+class Bread:
+    # 생성자 함수 - 속성
+    def __init__(self, kind, price, kcal):
+        self.kind = kind
+        self.price = price
+        self.kcal = kcal
+        self.brand = "파리크라상"
+
+    # 빵의 정보를 출력하는 메소드 등록
+    def info(self, kind, price, kcal):
+        print(f'\n 종류 : {self.kind} \n 가격 : {self.price} \n 칼로리{bread1.kcal} \n 브랜드{self.brand}')
+        # print(f'\n 종류 : {self.kind} \n
+        #           가격 : {self.price} \n
+        #       칼로리{bread1.kcal} \n 브랜드{self.brand}')
+
+
+# 인스턴스 생성
+bread1 = Bread('단팥빵', 3000, 200)
+print(f'\n 종류 : {bread1.kind} \n 가격 : {bread1.price} \n 칼로리{bread1.kcal} \n 브랜드{bread1.brand}')
+
+# 인스턴스 메소드 호출
+bread1.info('단팥빵', 3000, 200)
+
+bread2 = Bread('소보루빵', 2000, 180)
+bread2.info('소보루빵', 2000, 180)
+
+# 퀴즈 : 원 클래스 생성
+#  속성 : 반지름, 색상, 이름
+# 메소드 : info 속성출력  , 면적 출력
+
+# 클래스 정의
+class Circle:
+    def __init__(self, cName, color, radius):
+        self.cName = cName
+        self.color = color
+        self.radius = radius
+    def info(self, cName, color, radius):
+        print(f'원의 이름 : {self.cName}')
+        print(f'원의 색상 : {self.color}')
+        print(f'원의 반지름 : {self.radius}')
+    def area(self, radius):
+        print(f'원의 면적은? {3.14*self.radius**2}')
+
+# 인스턴스화
+circle1 = Circle('circle1', 'blue', 5)
+circle1.info('circle1', 'blue', 5)
+circle1.area(5)
+print('-'*30)
+circle2 = Circle('circle2', 'red', 10)
+circle2.info('circle2', 'red', 10)
+circle2.area(5)
+
+# 퀴즈 1
+# 삼각형을 클래스를 생성한 후 2개의 삼각형을 인스턴스화한 후
+# 속성(이름, 밑변, 높이)과 면적을 출력하여라
+# 삼각형의 면적 구하는 공식 (밑변의길이 * 높이)/2
+
+'''
+
+ t1은 Triangle의 인스턴스인가요? True
+
+ --------------------
+삼각형 이름 :  triangle1
+삼각형의 밑변 :  10
+삼각형의 높이 :  5
+삼각형의 면적 :  ?
+
+ t2는 Triangle의 인스턴스인가요? True
+ --------------------
+삼각형 이름 :  triangle2
+삼각형의 밑변 :  20
+삼각형의 높이 :  10
+삼각형의 면적 :  ?
+'''
+
+class Triangle:
+    def __init__(self, objName, base, height):
+        self.objName = objName
+        self.base = base
+        self.height = height
+    def info(self,objName, base, height):
+        print('\n','-'*20)
+        print('삼각형 이름 : ', objName)
+        print('삼각형의 밑변 : ', base)
+        print('삼각형의 높이 : ', height)
+    def area(self,base, height):
+        print('삼각형의 면적 : ', (base*height)/2)
+
+t1 = Triangle('triangle1', 10, 5)
+print(f'\n t1은 Triangle의 인스턴스인가요? {isinstance(t1, Triangle)}')
+t1.info('triangle1', 10, 5)
+t1.area(10, 5)
+
+t2 = Triangle('\n triangle2', 20, 8)
+print(f'\n t2는 Triangle의 인스턴스인가요? {isinstance(t2, Triangle)}')
+t2.info('triangle2', 20, 8)
+t2.area(20, 8)
+
+
+
+# 퀴즈 : 계산기 만들기
+# 2개의 숫자를 속성으로 가진 계산기 클래스 만들기
+# 4개의 메소드 (더하기 / 빼기 / 곱하기 / 나누기)
+# 인스턴스화 시킨 후 다음과 같이 출력한다
+#
+# [ 출력형태 : ]
+# 첫번째 숫자 : ?
+# 두번째 숫자 : ?
+# 더하기 : ?
+# 빼기 : ?
+# 곱하기 : ?
+# 나누기 : ?
+
+# 클래스 선언 -  Calculator
+# 생성자함수를 이용하여 속성 정의
+# 더하기 메소드 정의
+# 빼기 메소드 정의
+# 곱하기 메소드 정의
+# 나누기 메소드 정의
+# 클래스를 이용하여 인스턴스 생성
+# 출력형태로 메소드 호출하여 출력
+
+class Calculator:
+    def __init__(self,n1,n2):
+        self.n1 = n1
+        self.n2 = n2
+    def info(self,n1,n2):
+        print('첫번째 숫자 : ', n1)
+        print('두번째 숫자 : ', n2)
+    def c_method1(self,n1,n2):
+        print('더하기 : ', n1+n2)
+    def c_method2(self,n1,n2):
+        print('빼기 : ', n1-n2)
+    def c_method3(self,n1,n2):
+        print('곱하기 : ', n1*n2)
+    def c_method4(self,n1,n2):
+        print('나누기 : ', n1//n2)
+
+print('-'*10, '\n 인스턴스화 결과 \n')
+cObj= Calculator(10,20)
+cObj.info(10,20)
+cObj.c_method1(10,20)
+cObj.c_method2(10,20)
+cObj.c_method3(10,20)
+cObj.c_method4(10,20)
+
+# ---------------
+# 클래스 변수
+# 클래스 정의시 지정된 공용 변수
+# 생성자 함수 위에 정의
+# 동일한 주소값을 가지고 있다.
+# id(객체이름) : 주소 표시
+# 인스턴스 생성후 접근
+# - 인스턴스명.클래스변수명
+# - 클래스명.클래스변수명
+
+class Test2:
+    # 클래스 변수
+    message = "오늘도 좋은 하루"
+    def __init__(self, testName):
+        self.testName = testName
+    def messagePrint(self):
+        print(self.message)
+
+testInstance1 = Test2('testInstance1')
+testInstance1.messagePrint()
+print(f'message = {testInstance1.message}')
+print(f'message = {Test2.message}')
+# 클래스변수의 주소값 확인
+print(id(testInstance1.message))
+print(id(Test2.message))
+
+# ---------------
+# 상속이란?
+# 부모클래스의 속성이랑 메소드를 그대로 가진다.
+# class 클래스이름(부모클래스1,부모클래스2...)
+
+# 부모클래스1 - 아파트, 차
+# 부모클래스2 - 오피스텔, 전동스쿠터
+# 자식클래스 - 아파트, 차 , 오피스텔, 전동스쿠터
+
+# 부모클래스를 상속해서 자식 클래스 만들기
+# class 자식클래스명(부모클래스명1, 부모클래스명2....):
+#   명령문
+
+# 2개의 부모 클래스 생성후 자식 클래스 상속하기
+class Papa:
+    def __init__(self, firstName):
+        self.firstName = firstName
+    def info1(self):
+        print('아파트, 차')
+
+class Mama:
+    def __init__(self, lastName):
+        self.lastName = lastName
+    def info2(self):
+        print('오피스텔, 전동스쿠터')
+
+class Child(Papa, Mama):
+    def __init__(self, firstName, lastName, card):
+        Papa.__init__(self, firstName)
+        Mama.__init__(self, lastName)
+        # 새로운 속성 정의
+        self.card = card
+
+
+# 상속받은 자식 클래스 인스턴스화
+child1 = Child('Jones', 'Kim', '롯데카드')
+print('상속받은 메소드 호출')
+child1.info1()
+child1.info2()
+# 상속받은 속성
+print(child1.firstName)
+print(child1.lastName)
+# 새로운 속성
+print(child1.card)
+
+# 부모 클래스와 자식 클래스의 관계 확인
+# issubclass(자식클래스,부모클래스)
+# : 자식클래스와 부모 클래스와의 관계 표시 (True / False)
+# 부모 클래스 정보 표시
+# 클래스명.__bases__ => 튜플 형태
+print(issubclass(Child, Mama)) # True
+print(issubclass(Child, Papa)) # True
+print(issubclass(Child, Test2)) # False
+print(f' 상속받은 클래스 명은? /n {Child.__bases__}')
+# 상속받은 클래스 명은?
+# (<class '__main__.Papa'>, <class '__main__.Mama'>)
+
+
+
+# 인스턴스가 접근할 수 있는 속성과 메소드
+# dir(인스턴스명)
+
+
+# 메서드 오버라이딩(method overriding)
+# 상속 관계에서 부모클래스(Super Class)의 메서드에 대하여 
+# 자식클래스(Sub Class)에서 재정의하는 기능
+
+class A:
+    message = '메서드 오버라이딩 알아보기'
+    def __init__(self, gender, name, age):
+        self.gender = gender
+        self.name = name
+        self.age = age
+
+    def print(self, gender, name, age):
+        print(f'이름 : {name}')
+        print(f'나이 : {age}')
+        print(f'성별 : {gender}')
+        print('신림동에 산다.')
+
+class B(A):
+    def print(self):
+        print('서초동에 산다.')
+
+studentA = A('남', '홍길동', 20)
+print(studentA.message)
+studentA.print('남', '홍길동', 20)
+
+# 메서드 오버라이딩 알아보기
+# 이름 : 홍길동
+# 나이 : 20
+# 성별 : 남
+# 신림동에 산다.
+
+studentB = B('여', '동백이', 20)
+print(studentB.message)
+print(studentB.gender)
+studentB.print()
+
+# 메서드 오버라이딩 알아보기
+# 서초동에 산다.
+
+
+print(dir(studentA))
+print(dir(studentB))
+'''
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'age', 'gender', 'message', 'name', 'print']
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'age', 'gender', 'message', 'name', 'print']
+'''
+
+print(issubclass(A, B))  # False
+print(issubclass(B, A))  # True
+
+print(isinstance(studentA, A)) # True
+print(isinstance(studentA, B))
+
+# ------------------------------------------------
+# -------------------------------------------------
+
+# 연습문제 262
+
+# 연습문제 262
+# 퀴즈1
+# 아래의 클래스를 정의한 후 상속하는 UpgradeCalculator를 만들고
+# 값을 뺄수 있는 minus 메소드를 추가한다.
+
+# Calculator 정의
+class Calculator:
+    def __init__(self):
+        self.value = 0
+    def add(self, val):
+        self.value += val
+
+# 결과
+'''
+cal = UpgradeCalculator()
+cal.add(10)
+cal.minus(7)
+'''
+
+class UpgradeCalculator(Calculator):
+    def minus(self, val):
+        self.value -= val
+
+cal = UpgradeCalculator()
+print(cal.value) # 0
+cal.add(10)
+print(cal.value) # 10
+cal.minus(7)
+print(cal.value) # 3
+
+# 퀴즈2
+# 객체변수 value가 100 이상의 값은 가질수 없도록 제한하는 MaxLimitCalulator
+# 클래스를 만들어보자. 즉 다음과 같이 동작해야한다.
+'''
+cal = MaxLimitCalculator()
+cal.add(50)
+cal.add(60)  
+print(cal.value) #100
+'''
+# 단 다음과 같은 Calcultor2 클래스를 상속해서 만들어야 한다.
+
+class Calculator2:
+    def __init__(self):
+        self.value = 0
+    def add(self, val):
+        self.value += val
+
+
+class MaxLimitCalculator(Calculator2):
+    def add(self, val):
+        self.value += val
+        if self.value >= 100:
+            self.value = 100
+
+cal = MaxLimitCalculator()
+print(cal.value) # 0
+cal.add(50)
+print(cal.value) # 50
+cal.add(60)
+print(cal.value) # 100
+
+
+# ------------------------------------------------
+# -------------------------------------------------
+
+
+# 클래스 구조의 커피 자판기 프로그램
+# 속성 :  메뉴, 가격, 이름
+# 메소드
+# : 메뉴 표시
+# : 금액 투입
+# : 메뉴 선택과 선택한 메뉴 배달 완료
+# : 남은 금액 표시
+
+class Vending_machine():
+    def __init__(self, v_name):
+        self.v_name = v_name
+        self.product = ('아메리카노', '라떼', '마끼아또')
+        self.price = (500, 700, 1000)
+    # 메뉴 표시
+    def show_menu(self, v_name):
+        print(f'\n\n\t\t {self.v_name} ')
+        # print(f'메뉴1 : {self.product[0]} 가격 {self.price[0]}')
+        for i in range(0, len(self.product)):
+            print(f'메뉴{i+1} : {self.product[i]} 가격 {self.price[i]}')
+
+    # 금액 투입
+    def input_money(self):
+        while True:
+            self.in_money = input('주문하실 메뉴의 금액을 삽입구에 넣어주세요')
+            # 숫자만 입력되는 확인
+            if self.in_money.isdigit():
+                # 자료형 변경
+                self.in_money = int(self.in_money)
+                print(f'투입 금액 : {self.in_money}원')
+                break
+            else:
+                print('투입한 금액이 올바르지 않습니다.')
+
+    # : 메뉴 선택과 선택한 메뉴 배달 완료
+    def get_drink(self):
+        # 메뉴 선택 변수
+        sel = input('메뉴를 선택하세요 1.아메리카, 2.라떼, 3. 마끼아또')
+        if sel == '1':
+            print(f'주문하신 {self.product[0]}가 나왔습니다.')
+        elif sel == '2':
+            print(f'주문하신 {self.product[1]}가 나왔습니다.')
+        elif sel == '3':
+            print(f'주문하신 {self.product[2]}가 나왔습니다.')
+        else:
+            print('선택한 번호의 메뉴가 없습니다. 1~3 입력해주세요')
+
+# vmtest = Vending_machine('역삼점')
+# vmtest.show_menu('역삼점')
+# vmtest.input_money()
+# vmtest.get_drink()
+
+# 메인
+vm = Vending_machine('강남점')
+while True:
+    # 메뉴 표시
+    vm.show_menu('강남점')
+    # 금액 삽입 메세지
+    vm.input_money()
+    # 투입금액이 가장 낮은 메뉴의 가격보다 큰지 확인
+    if vm.in_money >= int(min(vm.price)):
+        print('주문이 가능합니다.')
+        # 메뉴 선택과 주문 완료
+        vm.get_drink()
+        break
+    else:
+        print('투입 금액이 부족하여 주문이 불가능합니다.')
+
+print('주문이 모두 완료 되었습니다.')
+
+# ------------------------------------------------
+# -------------------------------------------------
+'''
+-  모듈 
+-  패키지 
+-  if __name__ =="__main__":  실행문 
+
+'''
+
+# ------------------------------------------------
+# -------------------------------------------------
+# 자료선언
+# 변수 < 콜렉션 (리스트, 튜플, 집합, 딕셔너리) <
+# 함수 < 클래스 < 모듈(파일단위) < 패키지(폴더 단위)
+
+# 모듈(Module)이란?
+# 함수, 클래스의 집합 => 별도의 파일(*.py)로 생성
+# 모듈의 종류
+# - 내부모듈
+# : 파이썬에서 기본적으로 제공
+# : datetime, time, math, random ....
+# - 외부 모듈
+# : pip/pip3(파이썬), conda(아나콘다)를 이용해서 별도 설치
+# : 파이참에서는 [File]-[Settings]
+#       [Project Interpreter]에서 확인
+# : pandas, numpy, mathplotlib, seaborn, flask ...
+# - 사용자정의 모듈
+# : 필요에 의해서 직접 모듈로 등록한 후 사용
+
+# 모듈의 호출방법 1
+# import 모듈이름
+# 모듈이름.함수(인자)
+
+# 모듈의 호출방법 2
+# import 모듈이름 as 별칭
+# 호출된 모듈의 함수 호출방법2
+# 별칭.함수(인자)
+
+# 모듈의 호출방법 3
+# from 모듈이름 import 모듈함수
+# 호출된 모듈의 함수 호출방법3
+# 모듈함수(인자)
+
+# ---->
+# 모듈 이용방법 1
+# math 모듈
+# : 내부모듈, 수학함수 sin(), cos(), tan(), pi ...
+# import math
+# print('sin(10) => ', math.sin(10))
+# print('pi => ', math.pi)
+# print(dir(math))
+
+# 모듈 이용방법 2 : 별칭(Alias) 방식
+# import math as m
+# print('sin(10) => ', m.sin(10))
+# print('pi => ', m.pi)
+
+
+# 모듈 이용방법 3 : from 방식
+# 주의사항
+# : 함수이름만 import 뒤에 쉼표(,)를 이용하여 나열
+from math import sin, pi, tan
+print('sin(10) => ', sin(10))
+print('pi => ', pi)
+print('pi => ', tan(10))
+
+#
+# # -------------->
+# 난수(random) 발생 모듈 => 내부 모듈
+# 모듈 임포트
+# import random
+# 관련 함수
+# random.random()
+# : 0~1 사이의 소수점 방식으로 난수 발생
+# random.randrange(star,end,step)
+# : 범위를 지정해서 정수 난수 발생
+# : 짝수와 홀수로 조건 제한 가능
+# random.randint(star,end)
+# : 0~숫자까지 정수난수 발생
+# random.choice(리스트)
+# : 리스트요소를 무작위로 추출해서 아이템 한개만 표시
+# random.shuffle(리스트)
+# : 리스트안의 아이템을 무작위로 섞는다.
+
+import random
+
+print(random.random()) # 0.7484246388455121
+print(random.randrange(1,30)) # 18
+print(random.randint(50, 100)) # 92
+
+print(random.choice(['꽝','꽝','이마트 10만원', '스타벅스 20만원','BMW']))
+
+myList = [30, 60, 89, 78, 56]
+# random.shuffle() 출력문과 사용시 None
+print(random.shuffle([30, 60, 89, 78, 56])) # None
+random.shuffle(myList)
+print(myList)
+print(myList[0])
+
+
+# 퀴즈 : 로또번호 생성하기
+# 조건 :
+# 1~45 의 숫자중에서 6개로 구성
+# 숫자는 중복되면 안된다.
+# 로또리스트는 빈 리스트 생성
+# 반복문에서
+#   : 번호의 갯수가 6개라면 반복문 탈출
+#   : 1~45까지 번호중에서 1개 생성
+#   : 리스트안에 이미 번호가 있다면 다시 번호 생성
+#   : 중복번호가 아니라면 리스트에 추가
+# 로또 리스트를 출력한다.
+
+# lottoList = []
+# while True:
+#     # 탈출 조건: 번호 6개인지 확인
+#     if len(lottoList) >= 6:
+#         break
+#     else:
+#         # 로또번호 생성
+#         data = random.randint(1,45)
+#         # 로또번호가 리스트가 없는지 있는지 확인
+#         if data not in lottoList:
+#             lottoList.append(data)
+# print('금주의 로또번호 : ' , lottoList)
+
+def lotto_make(n):
+    lottoList = []
+    while True:
+        # 탈출 조건: 번호 6개인지 확인
+        if len(lottoList) >= n:
+            break
+        else:
+            # 로또번호 생성
+            data = random.randint(1, 45)
+            # 로또번호가 리스트가 없는지 있는지 확인
+            if data not in lottoList:
+                lottoList.append(data)
+    print('금주의 로또번호 : ', lottoList)
+
+lotto_make(8)
+lotto_make(6)
+
+
+# ----------------------
+# calendar 모듈 => 특정 년도의 월 출력, 내부 모듈
+import calendar as c
+# 특정 년도의 전체 달력 출력 함수
+# calendar(년도)
+# prcal(년도,월)  prcal(년도)
+# print(c.calendar(2020))
+# print(c.prcal(2020, 12))
+# print(type(c.calendar(2020))) # <class 'str'>
+
+
+# 특정 년도의 특정 월 출력
+# prmonth(년도, 월)
+# print() 구문안에 삽입시 마지막에 None 출력
+print(c.prmonth(2020,1))
+c.prmonth(2020,1)
+
+# 요일을 인덱스로 출력
+# weekday(년도,월,일) => 0~6 숫자로 표기
+# 0은 월요일
+print('2020년 1월 1일은 무슨요일? ',
+      c.weekday(2020,1,1)) # 2
+#
+# 인덱스값을 이용하여 요일 출력하기
+dayList = ['월','화','수','목','금','토', '일']
+print(dayList[c.weekday(2020,1,3)], '요일')
+
+# # 퀴즈
+# # 다음과 같이 출력
+# # 2020년 크리스마스는 무슨요일일까요?
+# # 목요일 입니다.
+# weekDay = ['월요일','화요일','수요일','목요일','금요일','토요일','일요일']
+# print('2020년 크리스마스는 무슨요일일까요? \n\n {} 입니다.'.format(weekDay[c.weekday(2020,12,25)]))
+
+# ---------------------------------------
+# ---------------------------------------
+
+# 사용자 정의 모듈
+
+# 같은 폴더에 저장
+# # test.py
+# def testPrint():
+#     print("모듈 테스트")
+
+# 사용자 정의 모듈 임포트
+# import 사용자정의파일명
+import test
+# 사용자정의모듈안에 있는 함수 호출
+test.testPrint()
+test.sum(10,20)
+
+# 퀴즈1 - 구구단 모듈
+# Step1. gugu.py로 입력한 숫자에 대한 구구단을 출력하는 모듈파일 생성
+# Step2. import gugu로 모듈을 임포트 한 후 모듈이 실행되는지 확인
+
+# 퀴즈2 - 로또 모듈
+# Step1.lotto.py로 갯수 지정시 자동으로 생성되는
+#       로또 번호를 리턴하는 모듈파일 생성
+# Step2. import lotto로 모듈을 임포트 한 후
+#       모듈이 실행되는지 확인
+
+
+
+# --------------
+# 패키지(Package)
+# 모듈파일을 별도의 폴더에 저장하여 쓰는 기능
+# 폴더는 패키지명으로 이용
+
+# 패키지 생성후 함수 호출은?
+
+# 1
+# import 패키지명.모듈명
+# 패키명.모듈명.함수(인자)
+
+# 2
+# import 패키지명.모듈명 as 별칭
+# 별칭.함수(인자)
+
+# 3
+# from 패키지명.모듈명 import 함수
+# 함수(인자)
+
+# 파이참에서 패키지용도의 폴더만들기
+# [Project] 창에서 폴더 마우스우측버튼
+# [New]-[python package]
+# 패키지폴더가 생성되고 자동으로 __init__.py 파일 생성
+# __init__.py
+# : 패키지폴더임을 알려주는 파일
+
+# 별도패키지폴더명 - AAA
+# 패키지안의 모듈 파일 - AAA/a.py
+# 모듈파일안에 함수 정의 - testPrint()
+
+# import AAA.a
+# AAA.a.testPrint()
+
+# import AAA.a as A
+# A.testPrint()
+
+from AAA.a import testPrint
+testPrint() # AAA패키지안의 a.py
+
+
+# 별도패키지폴더명 - AAA/BBB
+# 패키지안의 모듈 파일 - AAA/BBB/b.py
+# 모듈파일안에 함수 정의 - testPrintB()
+# import AAA.BBB.b
+# AAA.BBB.b.testPrintB()
+
+# import AAA.BBB.b as B
+# B.testPrintB()
+
+from AAA.BBB.b import testPrintB
+testPrintB() # AAA/BBB 패키지안의 b.py
+
+
+# 별도패키지폴더명 - CCC
+# CCC 패키지안에서 모듈 파일 생성
+# CCC/c1.py => testC1() 함수 정의
+# CCC/c2.py => testC2() 함수 정의
+
+# import CCC.c1, CCC.c2
+# CCC.c1.testC1()
+# CCC.c2.testC2()
+
+# 패키지로 정의된 폴더안의 __init__.py
+# __all__ = [모듈명1, 모듈명2...]
+# CCC/__init__.py
+# __all__ = ['c1', 'c2']
+
+# from 패키지명 import *
+# 함수 호출
+# 모듈명.함수명으로 호출가능
+
+from CCC import *
+c1.testC1()
+c2.testC2()
+
+
+
+#---------------------------------
+# 퀴즈1 : 패키지와 모듈
+# Calendar.printCalendar 형태로 패키지와 모듈, 함수를 정의하고
+# 현재 문서에서 임포트한 후 호출하여라
+# 함수 호출시 특정년도의 특정달이 출력되거나
+# 오늘날짜를 기준으로 현재의 달이 출력되어야 한다.
+'''
+
+import Cal.cal
+Cal.cal.printCalendarMonth(2020,12)
+Cal.cal.printCalendarMonth2()
+'''
+
+
+# 퀴즈2 : 클래스가 정의된 패키지안의 모듈
+# # ClassPackage 패키지 생성
+# # Student, Animal 패키지 생성
+# # Student 패키지안에 makeStudent.py 모듈 생성
+# # makeStudent.py 파일안에 이름, 국어, 수학, 영어 점수로 클래스를 생성하고
+# # 이름, 평균, 총점을 출력하는 메소드 정의
+# # Animal 패키지안에 makeAnimal.py 모듈 생성
+# # makeAnimal.py 파일안에 반려동물의 종류, 성별, 나이, 이름을 출력하는 메소드 정의
+#
+# # ClassPackage.Student, ClassPackage.Animal 패키지안의 모듈을 임포트하고
+# # 객체를 생성하고 메소드를 호출하여라.
+
+
+# ClassPackage.Student, ClassPackage.Animal 패키지안의 모듈을 임포트하고
+# 객체를 생성하고 메소드를 호출하여라.
+'''
+# 결과 
+
+------------------------------
+ 학생이름 : 김춘삼
+ 총점 : 235
+ 평균 : 78.33
+------------------------------
+ 학생이름 : 이주리
+ 총점 : 193
+ 평균 : 64.33
+******************************
+ 종류 : 시츄 강아지
+ 나이 : 1
+ 성별 : 남
+ 이름 : 아지
+******************************
+ 종류 : 페르시안 고양이
+ 나이 : 2
+ 성별 : 여
+ 이름 : 나비
+
+
+'''
+
+
